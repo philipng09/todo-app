@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thống kê – Việc của Phi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="inner">
+  <a class="logo" href="/"><span>✓</span>Việc của Phi</a>
+  <nav class="nav"><a href="/">Công việc</a><a href="stats.html" class="active">Thống kê</a></nav>
+  <div class="today-label"><button class="btn" id="btnReset" title="Xoá dữ liệu hiện tại và tạo lại 75 task mẫu">↺ Khôi phục dữ liệu mẫu</button></div>
+</div></header>
+
+<main>
+  <h1>Thống kê</h1>
+  <p class="sub">Tổng quan tiến độ công việc</p>
+
+  <section class="kpis">
+    <div class="kpi"><div class="label">Tổng số task</div><div class="value" id="kTotal">–</div><div class="hint" id="kTotalHint"></div></div>
+    <div class="kpi good"><div class="label">Tỉ lệ hoàn thành</div><div class="value" id="kRate">–</div><div class="hint" id="kRateHint"></div></div>
+    <div class="kpi"><div class="label">Hôm nay</div><div class="value" id="kToday">–</div><div class="hint">task đã xong / tổng task hôm nay</div></div>
+    <div class="kpi warn"><div class="label">Quá hạn</div><div class="value" id="kOverdue">–</div><div class="hint">task qua hạn chưa xong</div></div>
+  </section>
+
+  <section class="charts">
+    <div class="card wide"><h2>14 ngày gần nhất: task đến hạn và đã hoàn thành</h2><div class="chart-box"><canvas id="chDaily"></canvas></div></div>
+    <div class="card"><h2>Theo trạng thái</h2><div class="chart-box"><canvas id="chStatus"></canvas></div></div>
+    <div class="card"><h2>Theo độ ưu tiên</h2><div class="chart-box"><canvas id="chPriority"></canvas></div></div>
+    <div class="card wide"><h2>Theo danh mục</h2>
+      <table class="cat"><thead><tr><th>Danh mục</th><th class="num">Tổng</th><th class="num">Hoàn thành</th><th class="num">Tỉ lệ</th></tr></thead><tbody id="catBody"></tbody></table>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="/vendor/chart.js"></script>
+<script src="stats.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "todo-app-nodejs",
+  "version": "1.0.0",
+  "description": "Ứng dụng quản lý task cá nhân – Node.js, Express, SQLite (sql.js)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seed.js",
+    "test": "node --test test.js"
+  },
+  "engines": { "node": ">=18" },
+  "author": "Nguyễn Nhật Phi – 31241025042",
+  "license": "MIT",
+  "dependencies": {
+    "chart.js": "^4.6.2",
+    "express": "^4.22.3",
+    "sql.js": "^1.17.0"
+  }
+}

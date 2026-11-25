@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Việc của Phi – Todo app</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="inner">
+  <a class="logo" href="/"><span>✓</span>Việc của Phi</a>
+  <nav class="nav"><a href="/" class="active">Công việc</a><a href="stats.html">Thống kê</a></nav>
+  <div class="today-label" id="todayLabel"></div>
+</div></header>
+
+<main>
+  <h1 id="pageTitle">Hôm nay</h1>
+  <p class="sub" id="pageSub">Các task đến hạn trong ngày</p>
+
+  <!-- Tab xem: hôm nay / 7 ngày tới / quá hạn / tất cả -->
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" data-view="today" aria-selected="true">Hôm nay<span class="count" id="c-today">0</span></button>
+    <button class="tab" role="tab" data-view="upcoming" aria-selected="false">7 ngày tới<span class="count" id="c-upcoming">0</span></button>
+    <button class="tab overdue" role="tab" data-view="overdue" aria-selected="false">Quá hạn<span class="count" id="c-overdue">0</span></button>
+    <button class="tab" role="tab" data-view="all" aria-selected="false">Tất cả<span class="count" id="c-all">0</span></button>
+  </div>
+
+  <!-- Tìm kiếm + bộ lọc -->
+  <div class="toolbar">
+    <label class="search"><span class="sr" hidden>Tìm kiếm</span>
+      <input id="q" type="search" placeholder="Tìm theo tiêu đề hoặc mô tả..." autocomplete="off"></label>
+    <select id="fStatus" aria-label="Lọc trạng thái">
+      <option value="">Mọi trạng thái</option><option value="todo">Chưa làm</option><option value="doing">Đang làm</option><option value="done">Hoàn thành</option>
+    </select>
+    <select id="fPriority" aria-label="Lọc độ ưu tiên">
+      <option value="">Mọi ưu tiên</option><option value="high">Cao</option><option value="medium">Trung bình</option><option value="low">Thấp</option>
+    </select>
+    <select id="fCategory" aria-label="Lọc danh mục"><option value="">Mọi danh mục</option></select>
+    <select id="sort" aria-label="Sắp xếp">
+      <option value="due">Sắp xếp: hạn chót</option><option value="priority">Sắp xếp: ưu tiên</option><option value="created">Sắp xếp: mới tạo</option>
+    </select>
+    <button class="btn primary" id="btnAdd">＋ Thêm task</button>
+  </div>
+
+  <div class="progress-line" id="progress" hidden><span id="progressText"></span><div class="bar"><i id="progressBar"></i></div></div>
+  <div id="listWrap"></div>
+</main>
+
+<!-- Hộp thoại thêm / sửa -->
+<dialog id="dlg">
+  <form id="form" method="dialog" novalidate>
+    <div class="dlg-head" id="dlgTitle">Thêm task</div>
+    <div class="dlg-body">
+      <label>Tiêu đề *<input name="title" maxlength="120" required placeholder="Ví dụ: Ôn tập chương 6"></label>
+      <label>Mô tả<textarea name="description" rows="3" placeholder="Ghi chú thêm (không bắt buộc)"></textarea></label>
+      <div class="row2">
+        <label>Ngày hết hạn *<input name="due_date" type="date" required></label>
+        <label>Giờ<input name="due_time" type="time"></label>
+      </div>
+      <div class="row2">
+        <label>Độ ưu tiên<select name="priority"><option value="high">Cao</option><option value="medium" selected>Trung bình</option><option value="low">Thấp</option></select></label>
+        <label>Trạng thái<select name="status"><option value="todo">Chưa làm</option><option value="doing">Đang làm</option><option value="done">Hoàn thành</option></select></label>
+      </div>
+      <label>Danh mục<select name="category_id" id="formCategory"><option value="">Không có</option></select></label>
+      <div class="error" id="formError" role="alert"></div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn" id="btnCancel">Huỷ</button>
+      <button type="submit" class="btn primary" id="btnSave">Lưu</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Hộp thoại xác nhận xoá -->
+<dialog id="dlgDelete">
+  <div class="dlg-head">Xoá task?</div>
+  <div class="dlg-body"><p id="delText" style="margin:0"></p></div>
+  <div class="dlg-foot"><button class="btn" id="delCancel">Huỷ</button><button class="btn danger" id="delOk">Xoá</button></div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
